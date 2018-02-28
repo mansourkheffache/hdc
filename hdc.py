@@ -91,7 +91,7 @@ class Vector:
 
 class Space:
 
-    def __init__(self, size=32, rep='bsc'):
+    def __init__(self, size=1000, rep='bsc'):
         self.size = size;
         self.rep = rep;
         self.vectors = {}
