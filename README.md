@@ -1,0 +1,2 @@
+# hdc
+Hyperdimensional Computing Framework
