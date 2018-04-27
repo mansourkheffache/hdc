@@ -25,6 +25,31 @@ class Vector:
         z = np.bitwise_xor(x, y)
         return (np.sum(z[z == 1]) / float(len(z)))
 
+    # represeantaion template
+    def __init_xxx(size):
+        '''
+        Create a new (random) hyperdimensional vector and return it
+        '''
+        return None
+
+    def __add_xxx(x, y):
+        '''
+        Create a new hyperdimensional vector, z, that is the result of the addition (bundling) of two hyperdimensional vectors x and y
+        '''
+        return None
+
+    def __mul_xxx(x, y):
+        '''
+        Create a new hyperdimensional vector, z, that is the result of the multoplication (binding) of two hyperdimensional vectors x and y
+        '''
+        return None
+
+    def __dist_bsd(x, y):
+        '''
+        Return the distance between the two hyperdimensional vectors x and y
+        '''
+        return None
+
     # biploar
     def __init_bipolar(size):
         return np.random.choice([-1.0, 1.0], size=size)
@@ -50,12 +75,18 @@ class Vector:
             'mul': __mul_bsc,
             'dist': __dist_bsc
         },
+        'bsd': {
+            'init': __init_bsd,
+            'add': __add_bsd,
+            'mul': __mul_bsd,
+            'dist': __dist_bsd
+        },
         'bipolar': {
             'init': __init_bipolar,
             'add': __add_bipolar,
             'mul': __mul_bipolar,
             'dist': __dist_bipolar
-        }
+        },
     }
 
     # init random HDC vector
