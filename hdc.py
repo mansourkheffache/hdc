@@ -67,6 +67,26 @@ class Vector:
     def __dist_bipolar(x, y):
         return (len(x) - np.dot(x, y)) / (2 * float(len(x)))
 
+    # binary sparse
+    def __init_bsd(size):
+        # TODO make probability as a param
+        sparsity = 0.2
+        return np.random.choice([0, 1], size=size, p=[1-sparsity, sparsity])
+
+    def __add_bsd(x, y):
+        z = x + y
+        return z
+
+    def __mul_bsd(x, y):
+        z = np.bitwise_xor(x, y)
+        return z
+
+    def __dist_bsd(x ,y):
+        d = np.sum(np.bitwise_and(x, y)) / np.sqrt(np.sum(a) * np.sum(b))
+        return d
+
+
+
     # operations list
     __OPERATIONS = {
         'bsc': {
