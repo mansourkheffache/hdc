@@ -5,25 +5,7 @@ random.seed()
 
 class Vector:
 
-    # deifne operations depending on representation
-
-    # binary
-    def __init_bsc(size):
-        return np.random.randint(2, size=size)
-
-    def __add_bsc(x, y):
-        z = x + y
-        z[z == 1] = np.random.randint(2, size=len(z[z == 1]))
-        z[z == 2] = np.ones(len(z[z == 2]))
-        return z
-
-    def __mul_bsc(x, y):
-        z = np.bitwise_xor(x, y)
-        return z
-
-    def __dist_bsc(x ,y):
-        z = np.bitwise_xor(x, y)
-        return (np.sum(z[z == 1]) / float(len(z)))
+    # deifne: INIT, ADD, MUL, and DIST operations depending on representation
 
     # represeantaion template
     def __init_xxx(size):
@@ -44,11 +26,29 @@ class Vector:
         '''
         return None
 
-    def __dist_bsd(x, y):
+    def __dist_xxx(x, y):
         '''
         Return the distance between the two hyperdimensional vectors x and y
         '''
         return None
+
+    # binary
+    def __init_bsc(size):
+        return np.random.randint(2, size=size)
+
+    def __add_bsc(x, y):
+        z = x + y
+        z[z == 1] = np.random.randint(2, size=len(z[z == 1]))
+        z[z == 2] = np.ones(len(z[z == 2]))
+        return z
+
+    def __mul_bsc(x, y):
+        z = np.bitwise_xor(x, y)
+        return z
+
+    def __dist_bsc(x ,y):
+        z = np.bitwise_xor(x, y)
+        return (np.sum(z[z == 1]) / float(len(z)))
 
     # biploar
     def __init_bipolar(size):
