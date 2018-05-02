@@ -75,26 +75,37 @@ class Vector:
         return np.random.choice([0, 1], size=size, p=[1-sparsity, sparsity])
 
     def __add_bsd(x, y):
-        z = x + y
-        return z
+        # bundling in BSD is nothing but a fancy binding, role-filler scheme - use same code
+        # TODO refactor to explicitly reuse the same function
+        
+        z0 = np.bitwise_or(x, y)
+        # permutation factor
+        k = 8
+
+        zk = np.zeros((k, x.shape[0]), dtype=int)
+        for i in range(0, k):
+            zk[i] = np.random.permutation(z0)
+        z = np.bitwise_or.reduce(zk)
+
+        return np.bitwise_and(z, z0)
 
     def __mul_bsd(x, y):
         z0 = np.bitwise_or(x, y)
         # permutation factor
         k = 8
-        zk = np.fromfunction(lambda: np.random.permutation(z0), (k, x.shape[0]), dtype=int)
-        z = np.bitwise_or.reduce(zk)
-
-        # zk = np.zeros((k, x.shape[0]))
-        # for i in range(1, k):
-        #     zk[i] = np.random.permutation(z0)
+        # zk = np.fromfunction(lambda i, j: np.random.permutation(z0), (k, 1), dtype=int)
         # z = np.bitwise_or.reduce(zk)
 
-        return np.bitwise_and(z, zk)
+        zk = np.zeros((k, x.shape[0]), dtype=int)
+        for i in range(0, k):
+            zk[i] = np.random.permutation(z0)
+        z = np.bitwise_or.reduce(zk)
+
+        return np.bitwise_and(z, z0)
 
     def __dist_bsd(x ,y):
-        d = np.sum(np.bitwise_and(x, y)) / np.sqrt(np.sum(x) * np.sum(y))
-        return 1 - d
+        d = 1 - np.sum(np.bitwise_and(x, y)) / np.sqrt(np.sum(x) * np.sum(y))
+        return d
 
 
 
