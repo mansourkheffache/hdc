@@ -70,6 +70,7 @@ class Vector:
     # binary sparse
     def __init_bsd(size):
         # TODO make probability as a param
+        # sparsity << 0.5
         sparsity = 0.2
         return np.random.choice([0, 1], size=size, p=[1-sparsity, sparsity])
 
@@ -78,12 +79,22 @@ class Vector:
         return z
 
     def __mul_bsd(x, y):
-        z = np.bitwise_xor(x, y)
-        return z
+        z0 = np.bitwise_or(x, y)
+        # permutation factor
+        k = 8
+        zk = np.fromfunction(lambda: np.random.permutation(z0), (k, x.shape[0]), dtype=int)
+        z = np.bitwise_or.reduce(zk)
+
+        # zk = np.zeros((k, x.shape[0]))
+        # for i in range(1, k):
+        #     zk[i] = np.random.permutation(z0)
+        # z = np.bitwise_or.reduce(zk)
+
+        return np.bitwise_and(z, zk)
 
     def __dist_bsd(x ,y):
-        d = np.sum(np.bitwise_and(x, y)) / np.sqrt(np.sum(a) * np.sum(b))
-        return d
+        d = np.sum(np.bitwise_and(x, y)) / np.sqrt(np.sum(x) * np.sum(y))
+        return 1 - d
 
 
 
